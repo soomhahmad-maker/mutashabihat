@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>المتشابهات | رفيقك في ضبط آيات القرآن الكريم</title>
+<meta name="description" content="المتشابهات — رفيقك في ضبط آيات القرآن الكريم. اختر السورة والآية لعرض الآيات المتشابهة كليًا وجزئيًا مع التفسير المختصر والتلاوة." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>۞</text></svg>" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">۞</span>
+      <div>
+        <h1 class="brand-name">المتشابهات</h1>
+        <p class="brand-tag">رفيقك في ضبط آيات القرآن الكريم</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span id="corpusStatus" class="corpus-status" title="حالة فهرس المتشابهات">
+        <span class="dot"></span><span id="corpusStatusText">جاري تجهيز الفهرس…</span>
+      </span>
+      <button id="themeToggle" class="btn-icon" aria-label="تبديل المظهر" title="ليلي / نهاري">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="pill">📖 ضبط الحفظ • فهم • تثبيت</span>
+      <h2>اضبط متشابهات القرآن <span class="grad">آيةً بآية</span></h2>
+      <p class="hero-sub">رفيقك في ضبط آيات القرآن الكريم — اختر السورة، واضغط على أي آية، لتظهر لك في القسم المقابل كل الآيات المشابهة مع اسم السورة ورقمها: <b>التطابق الكلّي ملوّن أولًا</b>، ثم التشابه الجزئي في عبارة أو جملة، مع تفسير مختصر موثوق وتلاوة باختيارك من 6 مقرئين.</p>
+      <div class="hero-steps">
+        <div class="step"><span>١</span> اختر السورة</div>
+        <div class="step"><span>٢</span> اضغط على الآية</div>
+        <div class="step"><span>٣</span> قارن وثبّت بالتلاوة</div>
+      </div>
+      <div class="hero-stats">
+        <div><b>114</b><small>سورة</small></div>
+        <div><b>6236</b><small>آية</small></div>
+        <div><b>6</b><small>مقرئين</small></div>
+        <div><b>الميسّر</b><small>تفسير موثوق</small></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="orn">﴿ كِتَابًا مُتَشَابِهًا مَثَانِيَ ﴾<small>الزمر • ٢٣</small></div>
+      <div class="hero-hint">
+        <b>كيف تُقرأ النتائج؟</b>
+        <ul>
+          <li><i class="lg-full"></i> بطاقة ذهبية = تطابق كلّي في نص الآية</li>
+          <li><i class="lg-part"></i> تمييز ملوّن = العبارة المشتركة جزئيًا</li>
+        </ul>
+      </div>
+      <div class="reciters-note">🎧 التلاوة باختيارك من 6 مقرئين: <b>العفاسي</b> • <b>عبد الباسط</b> • <b>الحصري</b> • <b>المنشاوي</b> • <b>المعيقلي</b> • <b>العجمي</b></div>
+    </div>
+  </div>
+</section>
+
+<main class="container layout">
+  <!-- قسم الاختيار -->
+  <aside class="panel select-panel">
+    <div class="panel-head">
+      <h3>📚 اختيار السورة والآية</h3>
+      <input id="surahSearch" type="search" placeholder="ابحث عن سورة… (مثال: البقرة)" aria-label="بحث عن سورة" />
+    </div>
+    <div id="surahGrid" class="surah-grid" role="listbox" aria-label="السور"></div>
+    <div class="ayah-head">
+      <h4 id="ayahHeadTitle">آيات السورة</h4>
+      <input id="ayahSearch" type="number" min="1" placeholder="رقم الآية…" aria-label="انتقال لرقم آية" />
+    </div>
+    <div id="ayahList" class="ayah-list"><p class="empty">اختر سورة لعرض آياتها…</p></div>
+  </aside>
+
+  <!-- القسم المقابل: النتائج -->
+  <section class="panel result-panel">
+    <div id="selectedCard" class="selected-card hidden"></div>
+
+    <div class="result-head">
+      <h3>🔍 الآيات المشابهة <small id="resultCount"></small></h3>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-filter="all">الكل</button>
+        <button class="tab" data-filter="full">تطابق كلّي</button>
+        <button class="tab" data-filter="partial">تشابه جزئي</button>
+      </div>
+    </div>
+
+    <div id="loadingSimilar" class="loading hidden"><span class="spinner"></span> جاري استخراج المتشابهات…</div>
+
+    <div id="emptyResult" class="empty-result">
+      <div class="empty-art">۝</div>
+      <p><b>اضغط على أي آية من القائمة المقابلة</b></p>
+      <p class="muted">ستظهر هنا الآيات المطابقة كليًا أولًا بلون مميز، ثم الآيات المشابهة جزئيًا في عبارة أو جملة مع تظليل العبارة المشتركة.</p>
+      <p class="muted small">جرّب: سورة البقرة • الآية 134 ﴿تِلْكَ أُمَّةٌ قَدْ خَلَتْ…﴾ لها تطابق كلّي شهير.</p>
+    </div>
+
+    <div id="fullSection" class="hidden">
+      <h4 class="sec-title full">✦ تطابق كلّي <span id="fullCount" class="badge"></span></h4>
+      <p class="sec-desc">آيات مطابقة تمامًا للآية المقصودة — انتبه لمواضعها (اسم السورة ورقم الآية).</p>
+      <div id="fullList" class="cards"></div>
+    </div>
+
+    <div id="partialSection" class="hidden">
+      <h4 class="sec-title part">◈ تشابه جزئي في عبارة أو جملة <span id="partialCount" class="badge"></span></h4>
+      <p class="sec-desc">آيات تشترك مع الآية المقصودة في عبارة أو جملة — العبارة المشتركة <mark>مظللة بلون</mark>.</p>
+      <div id="partialList" class="cards"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div>المتشابهات — رفيقك في ضبط آيات القرآن الكريم 🤍</div>
+    <div class="sources">النص العثماني والتفسير الميسّر والتلاوة عبر <b>api.alquran.cloud</b> (مجمع الملك فهد) • الخطان: <b>IBM Plex Sans Arabic</b> بأسلوب ثمانية للواجهة و<b>Amiri Quran</b> للآيات • المقرئون الستة: العفاسي وعبد الباسط والحصري والمنشاوي والمعيقلي والعجمي</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
