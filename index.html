@@ -136,5 +136,17 @@
 </footer>
 
 <script src="app.js"></script>
+<script>
+  /* تسجيل عامل الخدمة بشرط: ليس في التطوير، ليس داخل iframe */
+  if ("serviceWorker" in navigator && window.location.protocol !== "localhost:" && window.self === window.top) {
+    navigator.serviceWorker.register("./sw.js", { scope: "./" })
+      .then((registration) => {
+        console.log("Service Worker registered:", registration.scope);
+      })
+      .catch((error) => {
+        console.log("Service Worker registration failed:", error);
+      });
+  }
+</script>
 </body>
 </html>
