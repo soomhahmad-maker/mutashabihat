@@ -203,12 +203,39 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
 ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:99px;opacity:.6}
 ::-webkit-scrollbar-track{background:transparent}
 
-@media (max-width:980px){
-  .hero-inner{grid-template-columns:1fr}
-  .layout{grid-template-columns:1fr}
-  .sel-audio{grid-template-columns:1fr}
-  .surah-grid{grid-template-columns:1fr 1fr}
+/* ===== pop-up تثبيت التطبيق ===== */
+.install-popup-overlay{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(13,122,95,.35);
+  backdrop-filter:blur(4px);
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  animation:fadeIn 0.3s ease-out;
 }
+.install-popup-overlay.hidden{display:none!important}
+.install-popup-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+  max-width:420px;
+  width:100%;
+  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  animation:slideUp 0.4s ease-out;
+}
+.install-popup-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.install-popup-icon{width:48px;height:48px;border-radius:14px;background:var(--goldbg);border:1px solid var(--full-border);color:var(--primary);display:grid;place-items:center;font-size:24px;flex-shrink:0}
+.install-popup-header h3{margin:0;font-size:18px;color:var(--text);font-weight:700}
+.install-popup-body{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:22px}
+.install-popup-actions{display:flex;gap:12px}
+.install-popup-btn-primary{flex:1;background:var(--primary);color:#fff;border:none;border-radius:12px;padding:12px 18px;font-weight:700;font-family:inherit;font-size:15px;cursor:pointer}
+.install-popup-btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.install-popup-btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px 18px;font-weight:600;font-family:inherit;font-size:14px;cursor:pointer}
+.install-popup-btn-secondary:hover{background:var(--chip);border-color:var(--primary)}
 
 /* ===== شارة تثبيت التطبيق ===== */
 .install-badge{
@@ -239,6 +266,15 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
 @keyframes slideInRight{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
 @media (max-width:480px){
   .install-badge{bottom:16px;right:16px;padding:10px 14px}
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media (max-width:980px){
+  .hero-inner{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr}
+  .sel-audio{grid-template-columns:1fr}
+  .surah-grid{grid-template-columns:1fr 1fr}
 }
 
 /* ===== صفحة التفسير الميسر ===== */

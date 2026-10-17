@@ -148,29 +148,43 @@
       });
   }
 
-  /* إشعار تثبيت التطبيق (PWA Install Badge) */
+  /* pop-up تثبيت التطبيق (PWA Install Prompt) */
   let deferredInstallPrompt = null;
 
-  const installBadge = document.createElement("div");
-  installBadge.className = "install-badge";
-  installBadge.innerHTML = `
-    <div class="install-badge-icon">📱</div>
-    <div class="install-badge-text">تثبيت التطبيق</div>
+  const installPopupOverlay = document.createElement("div");
+  installPopupOverlay.className = "install-popup-overlay";
+  installPopupOverlay.innerHTML = `
+    <div class="install-popup-card">
+      <div class="install-popup-header">
+        <div class="install-popup-icon">📱</div>
+        <h3>تثبيت تطبيق المتشابهات</h3>
+      </div>
+      <div class="install-popup-body">
+        تثبت التطبيق على هاتفك للوصول السريع إلى القرآن الكريم ومقارنة المتشابهات دون الحاجة لفتح المتصفح في كل مرة.
+      </div>
+      <div class="install-popup-actions">
+        <button class="install-popup-btn-secondary" id="closeInstallPopup">لاحقاً</button>
+        <button class="install-popup-btn-primary" id="installAppBtn">تثبيت الآن</button>
+      </div>
+    </div>
   `;
-  document.body.appendChild(installBadge);
+  document.body.appendChild(installPopupOverlay);
 
-  function showInstallBadge(){
+  const closeBtn = document.getElementById("closeInstallPopup");
+  const installBtn = document.getElementById("installAppBtn");
+
+  function showInstallPopup(){
     if(localStorage.getItem("mutashabihat-install-dismissed") === "true") return;
-    installBadge.classList.remove("hidden");
+    installPopupOverlay.classList.remove("hidden");
   }
 
   window.addEventListener("beforeinstallprompt", (e)=>{
     e.preventDefault();
     deferredInstallPrompt = e;
-    showInstallBadge();
+    showInstallPopup();
   });
 
-  installBadge.addEventListener("click", async ()=>{
+  installBtn.addEventListener("click", async ()=>{
     if(deferredInstallPrompt){
       deferredInstallPrompt.prompt();
       const { outcome } = await deferredInstallPrompt.userChoice;
@@ -179,12 +193,16 @@
       }
       deferredInstallPrompt = null;
     }
-    installBadge.classList.add("hidden");
+    installPopupOverlay.classList.add("hidden");
+  });
+
+  closeBtn.addEventListener("click", ()=>{
+    localStorage.setItem("mutashabihat-install-dismissed", "true");
+    installPopupOverlay.classList.add("hidden");
   });
 
   if(window.matchMedia("(display-mode: standalone)").matches){
     localStorage.setItem("mutashabihat-install-dismissed", "true");
-    installBadge.classList.add("hidden");
   }
 </script>
 </body>
