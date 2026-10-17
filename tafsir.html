@@ -142,10 +142,19 @@
         console.log("Service Worker registration failed:", error);
       });
   }
-</script>
-<script>
-  /* إشعار تثبيت التطبيق (PWA Install Prompt) */
+
+  /* إشعار تثبيت التطبيق (PWA Install Badge) */
   let deferredInstallPrompt = null;
+
+  const installBadge = document.createElement("div");
+  installBadge.className = "install-badge";
+  installBadge.innerHTML = `
+    <div class="install-badge-icon">📱</div>
+    <div class="install-badge-text">تثبيت التطبيق</div>
+    <button class="close-badge" id="closeBadgeBtn">×</button>
+  `;
+  document.body.appendChild(installBadge);
+
   const installPopup = document.createElement("div");
   installPopup.className = "install-popup";
   installPopup.innerHTML = `
@@ -164,17 +173,23 @@
   document.body.appendChild(installPopup);
 
   const installBtn = document.getElementById("installAppBtn");
-  const closeBtn = document.getElementById("closeInstallBtn");
+  const closeBadgeBtn = document.getElementById("closeBadgeBtn");
+  const closeInstallBtn = document.getElementById("closeInstallBtn");
 
-  function showInstallPopup(){
+  function showInstallBadge(){
     if(localStorage.getItem("mutashabihat-install-dismissed") === "true") return;
-    installPopup.classList.remove("hidden");
+    installBadge.classList.remove("hidden");
   }
 
   window.addEventListener("beforeinstallprompt", (e)=>{
     e.preventDefault();
     deferredInstallPrompt = e;
-    showInstallPopup();
+    showInstallBadge();
+  });
+
+  installBadge.addEventListener("click", (e)=>{
+    if(e.target.closest(".close-badge")) return;
+    installPopup.classList.toggle("hidden");
   });
 
   installBtn.addEventListener("click", async ()=>{
@@ -187,15 +202,24 @@
       deferredInstallPrompt = null;
     }
     installPopup.classList.add("hidden");
+    installBadge.classList.add("hidden");
   });
 
-  closeBtn.addEventListener("click", ()=>{
+  closeBadgeBtn.addEventListener("click", (e)=>{
+    e.stopPropagation();
+    localStorage.setItem("mutashabihat-install-dismissed", "true");
+    installBadge.classList.add("hidden");
+    installPopup.classList.add("hidden");
+  });
+
+  closeInstallBtn.addEventListener("click", ()=>{
     localStorage.setItem("mutashabihat-install-dismissed", "true");
     installPopup.classList.add("hidden");
   });
 
   if(window.matchMedia("(display-mode: standalone)").matches){
     localStorage.setItem("mutashabihat-install-dismissed", "true");
+    installBadge.classList.add("hidden");
   }
 </script>
 </body>
