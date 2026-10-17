@@ -192,3 +192,37 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
   .sel-audio{grid-template-columns:1fr}
   .surah-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ===== صفحة المتشابهات اللفظية ===== */
+.lafziya-layout{display:grid;grid-template-columns:300px 1fr;gap:18px;padding:18px;align-items:start}
+.controls-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;gap:14px;padding:16px;position:sticky;top:80px}
+.controls-panel h3{margin:0 0 8px;font-size:17px;display:flex;align-items:center;gap:8px}
+.controls-panel .section-sub{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:4px}
+.source-notice{background:var(--goldbg);border:1px solid var(--full-border);color:#5d4a00;border-radius:12px;padding:14px 16px;margin:16px 16px 0;font-size:14px;line-height:1.8}
+.source-notice b{color:#3d2f00}
+.source-notice p{margin:6px 0 0}
+.categories{display:flex;flex-wrap:wrap;gap:8px}
+.cat-btn{border:1px solid var(--border);background:var(--card2);color:var(--text);border-radius:10px;padding:7px 14px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;white-space:nowrap}
+.cat-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.cards-grid{display:grid;gap:14px;padding:0 16px 16px}
+.lafz-card{border-radius:14px;padding:16px;border:1px solid var(--border);background:var(--card2)}
+.lafz-card .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.lafz-title{font-weight:700;font-size:16px;color:var(--primary);line-height:1.4}
+.lafz-cat{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--border);color:var(--muted);white-space:nowrap}
+.lafz-verses{font-size:13px;color:var(--muted);margin-bottom:8px;background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:6px 10px;display:inline-block}
+.lafz-text{font-family:"Amiri Quran",serif;font-size:20px;line-height:2;margin:10px 0}
+.lafz-text mark{background:var(--mark);border-radius:6px;padding:0 5px}
+.diff-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:10px}
+.diff-box b{color:var(--primary)}
+.diff-item{margin:6px 0;font-size:14px;line-height:1.7}
+.diff-note{font-size:13px;color:var(--muted);margin-top:8px;border-top:1px dashed var(--border);padding-top:8px}
+.source-box{margin-top:10px;font-size:12px;color:var(--muted);background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:8px 12px;line-height:1.6}
+.source-box b{color:var(--primary)}
+.empty-lafz{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty-lafz .empty-art{font-size:70px;color:var(--gold);display:block;margin-bottom:12px}
+#lafziyaCount{font-size:14px;color:var(--muted);padding:0 16px 10px}
+
+@media (max-width:980px){
+  .lafziya-layout{grid-template-columns:1fr}
+  .controls-panel{position:static;top:auto}
+}

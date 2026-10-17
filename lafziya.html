@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>المتشابهات اللفظية و توجيهها | المتشابهات</title>
+<meta name="description" content="المتشابهات اللفظية في القرآن الكريم وتوجيهها، بناءً على كتاب أسرار التكرار في القرآن للإمام محمود بن حمزة الكرماني." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>۞</text></svg>" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">۞</span>
+      <div>
+        <h1 class="brand-name">المتشابهات</h1>
+        <p class="brand-tag">رفيقك في ضبط آيات القرآن الكريم</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="lafziya.html" class="btn-icon" aria-label="المتشابهات اللفظية" title="المتشابهات اللفظية و توجيهها" style="background:var(--goldbg);border-color:var(--full-border);color:var(--text)">📖</a>
+      <span id="corpusStatus" class="corpus-status" title="حالة فهرس المتشابهات">
+        <span class="dot"></span><span id="corpusStatusText">جاري تجهيز الفهرس…</span>
+      </span>
+      <button id="themeToggle" class="btn-icon" aria-label="تبديل المظهر" title="ليلي / نهاري">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:24px 0 12px">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="pill">📚 المتشابهات اللفظية • توجيه الكرماني</span>
+      <h2>المتشابهات اللفظية <span class="grad">و توجيهها</span></h2>
+      <p class="hero-sub">استخراج أمثلة المتشابه اللفظي من القرآن الكريم وتوجيهها، استنادًا إلى كتاب <b>«أسرار التكرار في القرآن»</b> للإمام <b>محمود بن حمزة الكرماني</b>، مع بيان مواضع الآيات وأوجه الاختلاف والتوجيه المذكور لكل مثال.</p>
+      <div class="hero-stats" style="margin-top:14px">
+        <div><b>الكرماني</b><small>مؤلف المصدر</small></div>
+        <div><b>أسرار التكرار</b><small>اسم الكتاب</small></div>
+        <div><b>القرآن</b><small>نص رسمي عثماني</small></div>
+      </div>
+    </div>
+    <div class="hero-card" style="grid-column:1">
+      <div class="orn">﴿ كِتَابًا مُتَشَابِهًا مَثَانِيَ ﴾<small>الزمر • ٢٣</small></div>
+      <div class="source-notice" style="margin-top:14px">
+        <b>⚠️ ملاحظة توثيق مهمة:</b><br>
+        المحتوى العلمي في هذه الصفحة قيد التوثق من نص كتاب «أسرار التكرار في القرآن» للإمام محمود بن حمزة الكرماني. حتى يتم توفير نسخة موثوقة من الكتاب والتحقق من الأمثلة وأرقام الأجزاء والصفحات، يُترك هذا القسم فارغًا تجنبًا لنسب أي قول إلى作者 دون أساس.
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="container lafziya-layout">
+  <!-- الشريط الجانبي: البحث والتصنيف -->
+  <aside class="controls-panel">
+    <h3>🔍 البحث والتصنيف</h3>
+    <div class="section-sub">ابحث عن كلمة، آية، أو عنوان موضوع</div>
+    <input id="lafziyaSearch" type="search" placeholder="ابحث في الأمثلة…" aria-label="بحث في المتشابهات اللفظية" />
+    <div class="section-sub" style="margin-top:10px">تصنيف الأمثلة</div>
+    <div class="categories" id="lafziyaCategories">
+      <button class="cat-btn active" data-cat="all">الكل</button>
+      <button class="cat-btn" data-cat="تقديم وتأخير">التقديم والتأخير</button>
+      <button class="cat-btn" data-cat="زيادة وحذف">الزيادة والحذف</button>
+      <button class="cat-btn" data-cat="اختلاف الألفاظ">اختلاف الألفاظ</button>
+      <button class="cat-btn" data-cat="أخرى">أخرى</button>
+    </div>
+  </aside>
+
+  <!-- المحتوى الرئيسي: البطاقات -->
+  <section class="results-panel">
+    <div id="lafziyaCount"></div>
+    <div id="lafziyaNotice" class="source-notice">
+      <p>لا توجد أمثلة موثقة عُرضت بعد من كتاب «أسرار التكرار في القرآن».</p>
+      <p class="section-sub">يمكنك إضافة الأمثلة يدويًا في ملف <code>lafziya.js</code> داخل مصفوفة <code>KIRMANI_EXAMPLES</code>، مع توثيق مصدر كل مثال (الكتاب، المؤلف، الجزء، الصفحة، السورة، رقم الآية).</p>
+    </div>
+    <div id="lafziyaGrid" class="cards-grid"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div>المتشابهات — رفيقك في ضبط آيات القرآن الكريم 🤍</div>
+    <div class="sources">التصميم والهوية: موقع المتشابهات • الصفحة: المتشابهات اللفظية و توجيهها • المصدر المقصود: كتاب «أسرار التكرار في القرآن» للإمام محمود بن حمزة الكرماني (يحتاج توفير نسخة موثوقة لتعبئة المحتوى العلمي)</div>
+  </div>
+</footer>
+
+<script src="lafziya.js"></script>
+</body>
+</html>
