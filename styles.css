@@ -193,6 +193,21 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
   .surah-grid{grid-template-columns:1fr 1fr}
 }
 
+/* ===== صفحة التفسير الميسر ===== */
+.tafsir-content{padding:0 16px 16px;display:flex;flex-direction:column;gap:14px}
+.tafsir-header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tafsir-header h3{margin:0;font-size:17px;color:var(--primary)}
+.tafsir-quran-text{font-family:"Amiri Quran",serif;font-size:24px;line-height:2.1;text-align:center;background:var(--goldbg);border:1px solid var(--full-border);border-radius:14px;padding:20px;margin:10px 0;box-shadow:var(--shadow)}
+.tafsir-quran-text mark{background:var(--mark);border-radius:6px;padding:0 5px}
+.tafsir-section{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:16px}
+.tafsir-section h4{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px}
+.tafsir-section h4::before{content:"";width:8px;height:24px;background:var(--primary);border-radius:4px}
+.tafsir-text{font-size:16px;line-height:2;color:var(--text)}
+.tafsir-text b{color:var(--primary)}
+@media (max-width:980px){
+  .tafsir-quran-text{font-size:20px;padding:16px}
+}
+
 /* ===== صفحة المتشابهات اللفظية ===== */
 .lafziya-layout{display:grid;grid-template-columns:300px 1fr;gap:18px;padding:18px;align-items:start}
 .controls-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;gap:14px;padding:16px;position:sticky;top:80px}

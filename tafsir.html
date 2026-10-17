@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>التفسير الميسر | المتشابهات</title>
+<meta name="description" content="التفسير الميسر لآيات القرآن الكريم بتفسير السعدي والبغوي — رفقك في فهم وضبط آيات القرآن." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>۞</text></svg>" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">۞</span>
+      <div>
+        <h1 class="brand-name">المتشابهات</h1>
+        <p class="brand-tag">رفيقك في ضبط آيات القرآن الكريم</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="tafsir.html" class="btn-icon" aria-label="التفسير الميسر" title="التفسير الميسر — السعدي والبغوي" style="background:var(--goldbg);border-color:var(--full-border);color:var(--text)">📖</a>
+      <span id="corpusStatus" class="corpus-status" title="حالة فهرس المتشابهات">
+        <span class="dot"></span><span id="corpusStatusText">جاري تجهيز الفهرس…</span>
+      </span>
+      <button id="themeToggle" class="btn-icon" aria-label="تبديل المظهر" title="ليلي / نهاري">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:24px 0 12px">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="pill">📚 التفسير الميسر • السعدي • البغوي</span>
+      <h2>التفسير الميسر <span class="grad">لآيات القرآن الكريم</span></h2>
+      <p class="hero-sub">اختر السورة والآية لعرض الآية نصًا رسميًا عثمانيًا مع تفسيرين مختصرين موثوقين: <b>تفسير السعدي</b> و<b>تفسير البغوي</b>، مع إمكانية الاستماع للتلاوة من 6 مقرئين.</p>
+      <div class="hero-stats" style="margin-top:14px">
+        <div><b>السعدي</b><small>تفسير موثوق</small></div>
+        <div><b>البغوي</b><small>تفسير موثوق</small></div>
+        <div><b>6</b><small>مقرئين</small></div>
+        <div><b>الميسّر</b><small>تفسير موثوق</small></div>
+      </div>
+    </div>
+    <div class="hero-card" style="grid-column:1">
+      <div class="orn">﴿ كِتَابًا مُتَشَابِهًا مَثَانِيَ ﴾<small>الزمر • ٢٣</small></div>
+      <div class="hero-hint" style="margin-top:14px">
+        <b>كيف تُستخدم الصفحة؟</b>
+        <ul style="margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px">
+          <li>اختر السورة من القائمة اليمنى</li>
+          <li>اضغط على أي آية لعرض تفسيرها</li>
+          <li>يمكنك الاستماع للتلاوة من المقرئ الذي تختاره</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="container layout">
+  <!-- قسم الاختيار -->
+  <aside class="panel select-panel">
+    <div class="panel-head">
+      <h3>📚 اختيار السورة والآية</h3>
+      <input id="tafsirSurahSearch" type="search" placeholder="ابحث عن سورة… (مثال: البقرة)" aria-label="بحث عن سورة" />
+    </div>
+    <div id="tafsirSurahGrid" class="surah-grid" role="listbox" aria-label="السور"></div>
+    <div class="ayah-head">
+      <h4 id="tafsirAyahHeadTitle">آيات السورة</h4>
+      <input id="tafsirAyahSearch" type="number" min="1" placeholder="رقم الآية…" aria-label="انتقال لرقم آية" />
+    </div>
+    <div id="tafsirAyahList" class="ayah-list"><p class="empty">اختر سورة لعرض آياتها…</p></div>
+  </aside>
+
+  <!-- القسم المقابل: التفسير -->
+  <section class="panel result-panel">
+    <div id="tafsirSelectedCard" class="selected-card hidden"></div>
+
+    <div id="tafsirLoading" class="loading hidden"><span class="spinner"></span> جاري جلب التفسير…</div>
+
+    <div id="tafsirEmpty" class="empty-result hidden">
+      <div class="empty-art">۝</div>
+      <p><b>اضغط على أي آية من القائمة المقابلة</b></p>
+      <p class="muted">سيظهر هنا نص الآية مع تفسير السعدي وتفسير البغوي وتلاوة من 6 مقرئين.</p>
+    </div>
+
+    <div id="tafsirContent" class="tafsir-content hidden">
+      <div class="tafsir-header">
+        <h3 id="tafsirVerseRef">الآية</h3>
+        <div class="tafsir-actions">
+          <button class="mini-btn" id="tafsirCopyVerse">📋 نسخ الآية</button>
+        </div>
+      </div>
+      <div class="tafsir-quran-text" id="tafsirQuranText"></div>
+
+      <div class="tafsir-section">
+        <h4>📘 تفسير السعدي</h4>
+        <div class="tafsir-text" id="tafsirSaadi"></div>
+      </div>
+
+      <div class="tafsir-section">
+        <h4>📗 تفسير البغوي</h4>
+        <div class="tafsir-text" id="tafsirBaghawi"></div>
+      </div>
+
+      <div class="sel-audio reciter-box">
+        <label class="reciter-pick">🎧 المقرئ:
+          <select class="reciter-select" id="tafsirReciterSelect" aria-label="اختيار المقرئ"></select>
+        </label>
+        <audio controls preload="none" id="tafsirAudio" style="width:100%;height:38px"></audio>
+        <small class="muted">6 مقرئين: العفاسي • عبد الباسط • الحصري • المنشاوي • المعيقلي • العجمي</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div>المتشابهات — رفيقك في ضبط آيات القرآن الكريم 🤍</div>
+    <div class="sources">النص العثماني والتلاوة عبر <b>api.alquran.cloud</b> (مجمع الملك فهد) • التفسير الميسّر عبر API التفسير • الخطان: <b>IBM Plex Sans Arabic</b> بأسلوب ثمانية للواجهة و<b>Amiri Quran</b> للآيات • المقرئون الستة: العفاسي وعبد الباسط والحصري والمنشاوي والمعيقلي والعجمي</div>
+  </div>
+</footer>
+
+<script src="tafsir.js"></script>
+</body>
+</html>
