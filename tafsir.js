@@ -1,4 +1,4 @@
-/* ===== التفسير الميسر — الميسر والجلالين ===== */
+/* ===== التفسير الميسر — السعدي والجلالين ===== */
 
 const SURAHS = [
 [1,"الفاتحة",7,"مكية"],[2,"البقرة",286,"مدنية"],[3,"آل عمران",200,"مدنية"],[4,"النساء",176,"مدنية"],
@@ -186,24 +186,24 @@ function initTafsirAudio(){
 function loadTafsir(){
   const key = state.surah + ":" + state.ayah;
 
-  // تفسير الميسر (بديل السعدي)
-  $("tafsirSaadi").innerHTML = `<div class="tafsir-loading"><span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير الميسر…</div>`;
-  // تفسير الجلالين (بديل الطبري)
+  // تفسير السعدي
+  $("tafsirSaadi").innerHTML = `<div class="tafsir-loading"><span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير السعدي…</div>`;
+  // تفسير الجلالين
   $("tafsirBaghawi").innerHTML = `<div class="tafsir-loading"><span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير الجلالين…</div>`;
 
-  // جلب تفسير الميسر
-  fetch(tafsirURL("ar.muyassar", state.surah, state.ayah))
+  // جلب تفسير السعدي
+  fetch(tafsirURL("ar.al-saadi", state.surah, state.ayah))
     .then(r=>r.json())
     .then(j=>{
       if(j.code===200 && j.data && j.data.text && j.data.edition && j.data.edition.type==="tafsir"){
         $("tafsirSaadi").innerHTML = escapeHtml(j.data.text);
       } else {
-        $("tafsirSaadi").innerHTML = `<div class="tafsir-error">تفسير الميسر غير متاح لهذه الآية.</div>`;
+        $("tafsirSaadi").innerHTML = `<div class="tafsir-error">تفسير السعدي غير متاح لهذه الآية.</div>`;
       }
     })
-    .catch(()=>{ $("tafsirSaadi").innerHTML = `<div class="tafsir-error">تعذّر جلب تفسير الميسر.</div>`; });
+    .catch(()=>{ $("tafsirSaadi").innerHTML = `<div class="tafsir-error">تعذّر جلب تفسير السعدي.</div>`; });
 
-  // جلب تفسير الجلالين (بديل الطبري)
+  // جلب تفسير الجلالين
   fetch(tafsirURL("ar.jalalayn", state.surah, state.ayah))
     .then(r=>r.json())
     .then(j=>{
