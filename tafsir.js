@@ -226,3 +226,14 @@ function loadTafsir(){
 initTheme();
 renderSurahList();
 selectSurah(2);
+
+/* قراءة معامل التفسي من الرابط URL */
+const urlParams = new URLSearchParams(window.location.search);
+const defaultTafsir = urlParams.get('tafsir') || 'saadi';
+if(defaultTafsir === 'baghawi'){
+  const saadiBox = $("tafsirSaadi").parentElement;
+  const baghawiBox = $("tafsirBaghawi").parentElement;
+  if(saadiBox && baghawiBox && saadiBox.parentNode){
+    saadiBox.parentNode.insertBefore(baghawiBox, saadiBox);
+  }
+}

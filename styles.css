@@ -54,6 +54,23 @@ body{
   width:44px;height:44px;border-radius:14px;font-size:20px;cursor:pointer;box-shadow:var(--shadow)}
 .btn-icon:hover{transform:translateY(-1px)}
 
+/* قائمة التفاسير المنسدلة */
+.dropdown{position:relative;display:inline-block}
+.dropdown-content{display:none;position:absolute;right:0;top:100%;background:var(--card);
+  border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);
+  min-width:160px;z-index:100;padding:8px;gap:6px;flex-direction:column}
+.dropdown-content a{display:flex;align-items:center;gap:10px;padding:10px 14px;
+  color:var(--text);text-decoration:none;font-size:15px;border-radius:10px;
+  transition:.15s;font-family:inherit}
+.dropdown-content a:hover{background:var(--chip);color:var(--primary)}
+.dropdown:hover .dropdown-content{display:flex}
+.dropdown-btn{position:relative}
+
+@media (max-width:480px){
+  .dropdown-content{min-width:140px}
+  .dropdown-content a{font-size:14px;padding:8px 10px}
+}
+
 /* Hero */
 .hero{padding:28px 0 10px}
 .hero-inner{display:grid;grid-template-columns:1.4fr .9fr;gap:18px;align-items:stretch}
