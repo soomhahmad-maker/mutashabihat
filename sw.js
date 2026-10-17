@@ -19,8 +19,6 @@ const PRECACHE_URLS = [
   "./styles.css",
   "./app.js",
   "./manifest.json",
-  "./lafziya.html",
-  "./lafziya.js",
   "./tafsir.html",
   "./tafsir.js",
   "./sw.js"
