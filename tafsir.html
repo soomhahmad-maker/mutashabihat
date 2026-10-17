@@ -143,5 +143,60 @@
       });
   }
 </script>
+<script>
+  /* إشعار تثبيت التطبيق (PWA Install Prompt) */
+  let deferredInstallPrompt = null;
+  const installPopup = document.createElement("div");
+  installPopup.className = "install-popup";
+  installPopup.innerHTML = `
+    <div class="install-popup-content">
+      <div class="install-popup-icon">📱</div>
+      <div class="install-popup-text">
+        <h4>تثبيت تطبيق المتشابهات</h4>
+        <p>يمكنك تثبيت الموقع كتطبيق على هاتفك للوصول السريع دون الحاجة لفتح المتصفح.</p>
+      </div>
+      <div class="install-popup-actions">
+        <button class="install-btn" id="installAppBtn">تثبيت التطبيق</button>
+        <button class="close-install" id="closeInstallBtn">×</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(installPopup);
+
+  const installBtn = document.getElementById("installAppBtn");
+  const closeBtn = document.getElementById("closeInstallBtn");
+
+  function showInstallPopup(){
+    if(localStorage.getItem("mutashabihat-install-dismissed") === "true") return;
+    installPopup.classList.remove("hidden");
+  }
+
+  window.addEventListener("beforeinstallprompt", (e)=>{
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    showInstallPopup();
+  });
+
+  installBtn.addEventListener("click", async ()=>{
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      if(outcome === "accepted"){
+        localStorage.setItem("mutashabihat-install-dismissed", "true");
+      }
+      deferredInstallPrompt = null;
+    }
+    installPopup.classList.add("hidden");
+  });
+
+  closeBtn.addEventListener("click", ()=>{
+    localStorage.setItem("mutashabihat-install-dismissed", "true");
+    installPopup.classList.add("hidden");
+  });
+
+  if(window.matchMedia("(display-mode: standalone)").matches){
+    localStorage.setItem("mutashabihat-install-dismissed", "true");
+  }
+</script>
 </body>
 </html>

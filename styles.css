@@ -210,6 +210,37 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
   .surah-grid{grid-template-columns:1fr 1fr}
 }
 
+/* ===== إشعار تثبيت التطبيق ===== */
+.install-popup{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  right:20px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  padding:18px 20px;
+  z-index:1000;
+  display:none;
+  animation:slideUp 0.4s ease-out;
+}
+.install-popup.hidden{display:none!important}
+.install-popup-content{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.install-popup-icon{width:48px;height:48px;border-radius:12px;background:var(--goldbg);border:1px solid var(--full-border);color:var(--primary);display:grid;place-items:center;font-size:26px;flex-shrink:0}
+.install-popup-text{flex:1;min-width:0}
+.install-popup-text h4{margin:0 0 4px;font-size:15px;color:var(--text)}
+.install-popup-text p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.install-popup-actions{display:flex;gap:10px;margin-top:12px}
+.install-btn{background:var(--primary);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:700;font-family:inherit;font-size:14px;cursor:pointer}
+.install-btn:hover{opacity:.9;transform:translateY(-1px)}
+.close-install{background:transparent;border:none;color:var(--muted);font-size:20px;cursor:padding;padding:4px 8px;border-radius:8px;line-height:1}
+.close-install:hover{background:var(--chip);color:var(--text)}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media (max-width:480px){
+  .install-popup{bottom:16px;left:16px;right:16px;padding:16px}
+}
+
 /* ===== صفحة التفسير الميسر ===== */
 .tafsir-content{padding:0 16px 16px;display:flex;flex-direction:column;gap:14px}
 .tafsir-header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
