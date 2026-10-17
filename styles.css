@@ -210,7 +210,7 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
   .surah-grid{grid-template-columns:1fr 1fr}
 }
 
-/* ===== إشعار تثبيت التطبيق ===== */
+/* ===== شارة تثبيت التطبيق ===== */
 .install-badge{
   position:fixed;
   bottom:24px;
@@ -218,7 +218,7 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
   background:var(--primary);
   color:#fff;
   border-radius:50px;
-  padding:12px 16px;
+  padding:12px 18px;
   box-shadow:0 10px 30px rgba(13,122,95,.4);
   z-index:1000;
   display:none;
@@ -229,44 +229,16 @@ footer{margin:20px 0 30px;color:var(--muted);font-size:13px;text-align:center}
   display:flex;
   align-items:center;
   gap:10px;
+  transition:transform .2s;
 }
 .install-badge.hidden{display:none!important}
+.install-badge:hover{transform:scale(1.05)}
+.install-badge:active{transform:scale(0.95)}
 .install-badge-icon{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:16px;flex-shrink:0}
 .install-badge-text{font-size:13px;white-space:nowrap}
-.close-badge{background:none;border:none;color:rgba(255,255,255,.7);font-size:18px;padding:2px 6px;border-radius:50%;margin-left:8px;cursor:pointer;line-height:1}
-.close-badge:hover{background:rgba(255,255,255,.15);color:#fff}
 @keyframes slideInRight{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
-
-/* pop-up التفاصيل عند الضغط على الشارة */
-.install-popup{
-  position:fixed;
-  bottom:80px;
-  right:24px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  padding:18px 20px;
-  z-index:999;
-  display:none;
-  animation:slideUp 0.4s ease-out;
-  min-width:260px;
-}
-.install-popup.hidden{display:none!important}
-.install-popup-content{display:flex;align-items:center;gap:12px}
-.install-popup-icon{width:44px;height:44px;border-radius:12px;background:var(--goldbg);border:1px solid var(--full-border);color:var(--primary);display:grid;place-items:center;font-size:22px;flex-shrink:0}
-.install-popup-text{flex:1;min-width:0}
-.install-popup-text h4{margin:0 0 4px;font-size:15px;color:var(--text)}
-.install-popup-text p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-.install-popup-actions{display:flex;gap:10px;margin-top:14px}
-.install-btn{background:var(--primary);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:700;font-family:inherit;font-size:14px;cursor:pointer}
-.install-btn:hover{opacity:.9;transform:translateY(-1px)}
-.close-install{background:transparent;border:none;color:var(--muted);font-size:20px;cursor:padding;padding:4px 8px;border-radius:8px;line-height:1}
-.close-install:hover{background:var(--chip);color:var(--text)}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
 @media (max-width:480px){
   .install-badge{bottom:16px;right:16px;padding:10px 14px}
-  .install-popup{bottom:72px;right:16px;left:16px;min-width:auto}
 }
 
 /* ===== صفحة التفسير الميسر ===== */
