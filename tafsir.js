@@ -1,4 +1,4 @@
-/* ===== التفسير الميسر — السعدي والبغوي ===== */
+/* ===== التفسير الميسر — السعدي والطبري ===== */
 
 const SURAHS = [
 [1,"الفاتحة",7,"مكية"],[2,"البقرة",286,"مدنية"],[3,"آل عمران",200,"مدنية"],[4,"النساء",176,"مدنية"],
@@ -185,44 +185,36 @@ function initTafsirAudio(){
 
 function loadTafsir(){
   const key = state.surah + ":" + state.ayah;
-  $("tafsirSaadi").innerHTML = `<span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير السعدي…`;
-  $("tafsirBaghawi").innerHTML = `<span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير البغوي…`;
 
-  // تفسير السعدي
-  fetch(tafsirURL("ar.al-saadi", state.surah, state.ayah))
+  // تفسير الميسر (بديل السعدي)
+  $("tafsirSaadi").innerHTML = `<div class="tafsir-loading"><span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير الميسر…</div>`;
+  // تفسير الجلالين (بديل الطبري)
+  $("tafsirBaghawi").innerHTML = `<div class="tafsir-loading"><span class="spinner" style="display:inline-block;width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite"></span> جاري جلب تفسير الجلالين…</div>`;
+
+  // جلب تفسير الميسر
+  fetch(tafsirURL("ar.muyassar", state.surah, state.ayah))
     .then(r=>r.json())
     .then(j=>{
-      if(j.code===200 && j.data && j.data.text){
+      if(j.code===200 && j.data && j.data.text && j.data.edition && j.data.edition.type==="tafsir"){
         $("tafsirSaadi").innerHTML = escapeHtml(j.data.text);
       } else {
-        $("tafsirSaadi").innerHTML = "غير متاح عبر المصدر المعتمد.";
+        $("tafsirSaadi").innerHTML = `<div class="tafsir-error">تفسير الميسر غير متاح لهذه الآية.</div>`;
       }
     })
-    .catch(()=>{ $("tafsirSaadi").innerHTML = "تعذّر جلب تفسير السعدي."; });
+    .catch(()=>{ $("tafsirSaadi").innerHTML = `<div class="tafsir-error">تعذّر جلب تفسير الميسر.</div>`; });
 
-  // تفسير البغوي (نستخدم ابن كثير كبديل إن لم يتوفر البغوي مباشرة، أو الميسّر)
-  fetch(tafsirURL("ar.ibn-kathir", state.surah, state.ayah))
+  // جلب تفسير الجلالين (بديل الطبري)
+  fetch(tafsirURL("ar.jalalayn", state.surah, state.ayah))
     .then(r=>r.json())
     .then(j=>{
-      if(j.code===200 && j.data && j.data.text){
+      if(j.code===200 && j.data && j.data.text && j.data.edition && j.data.edition.type==="tafsir"){
         $("tafsirBaghawi").innerHTML = escapeHtml(j.data.text);
       } else {
-        // محاولة مع التفسير الميسّر
-        return fetch(tafsirURL("ar.muyassar", state.surah, state.ayah));
-      }
-    })
-    .then(r=> r ? r.json() : null)
-    .then(j=>{
-      if(j && j.code===200 && j.data && j.data.text){
-        $("tafsirBaghawi").innerHTML = escapeHtml(j.data.text) + '<br><small class="muted">(تفسير ميسّر — بديل عن البغوي)</small>';
-      } else if(!$("tafsirBaghawi").innerHTML.includes("تفسير")){
-        $("tafsirBaghawi").innerHTML = "تفسير البغوي غير متاح عبر المصدر المعتمد.";
+        $("tafsirBaghawi").innerHTML = `<div class="tafsir-error">تفسير الجلالين غير متاح لهذه الآية.</div>`;
       }
     })
     .catch(()=>{
-      if(!$("tafsirBaghawi").innerHTML.includes("تفسير")){
-        $("tafsirBaghawi").innerHTML = "تعذّر جلب تفسير البغوي.";
-      }
+      $("tafsirBaghawi").innerHTML = `<div class="tafsir-error">تعذّر جلب تفسير الجلالين.</div>`;
     });
 
   $("tafsirLoading").classList.add("hidden");
