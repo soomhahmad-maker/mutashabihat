@@ -22,7 +22,7 @@
       "purpose": "any"
     },
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230D7A5F'/%3E%3Cpath d='M96 28c-37.6 0-68 30.4-68 68s30.4 68 68 68 68-30.4 68-68-30.4-68-68-68zM96 54c-23.2 0-42 18.8-42 42s18.8 42 42 42 42-18.8 42-42-18.8-42-42-42zm16 84c0 8.8-7.2 16-16 16s-16-7.2-16-16 7.2-16 16-16 16 7.2 16 16z' fill='%23FFF9F0'/%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230D7A5F'/%3E%3Cpath d='M96 28c-37.6 0-68 30.4-68 68s30.4 68 68 68 68-30.4 68-68-30.4-68-68-68zM96 54c-23.2 0-42 18.8-42 42s42-18.8 42-42-18.8-42-42-42zm16 84c0 8.8-7.2 16-16 16s-16-7.2-16-16 7.2-16 16-16 16 7.2 16 16z' fill='%23FFF9F0'/%3E%3C/svg%3E",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "maskable"
@@ -32,5 +32,8 @@
       "sizes": "180x180",
       "type": "image/svg+xml"
     }
-  ]
+  ],
+  "categories": ["education", "reference", "books"],
+  "lang": "ar",
+  "dir": "rtl"
 }

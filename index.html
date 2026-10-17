@@ -35,6 +35,7 @@
           <a href="tafsir.html?tafsir=baghawi" class="dropdown-item">📗 تفسير البغوي</a>
         </div>
       </div>
+      <button id="installAppHeaderBtn" class="btn-icon" aria-label="تثبيت التطبيق" title="تثبيت تطبيق المتشابهات" style="display:none">📲</button>
       <span id="corpusStatus" class="corpus-status" title="حالة فهرس المتشابهات">
         <span class="dot"></span><span id="corpusStatusText">جاري تجهيز الفهرس…</span>
       </span>
@@ -150,6 +151,7 @@
 
   /* pop-up تثبيت التطبيق (PWA Install Prompt) */
   let deferredInstallPrompt = null;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const installPopupOverlay = document.createElement("div");
   installPopupOverlay.className = "install-popup-overlay";
@@ -160,11 +162,11 @@
         <h3>تثبيت تطبيق المتشابهات</h3>
       </div>
       <div class="install-popup-body">
-        تثبت التطبيق على هاتفك للوصول السريع إلى القرآن الكريم ومقارنة المتشابهات دون الحاجة لفتح المتصفح في كل مرة.
+        ${isIOS ? "اضغط على زر المشاركة (مربع مع سهم صاعد) ثم اختر \"إضافة إلى الشاشة الرئيسية\"" : "تثبيت التطبيق على هاتفك للوصول السريع إلى القرآن الكريم ومقارنة المتشابهات دون الحاجة لفتح المتصفح في كل مرة."}
       </div>
       <div class="install-popup-actions">
         <button class="install-popup-btn-secondary" id="closeInstallPopup">لاحقاً</button>
-        <button class="install-popup-btn-primary" id="installAppBtn">تثبيت الآن</button>
+        <button class="install-popup-btn-primary" id="installAppBtn">${isIOS ? "فهمت" : "تثبيت الآن"}</button>
       </div>
     </div>
   `;
@@ -172,6 +174,7 @@
 
   const closeBtn = document.getElementById("closeInstallPopup");
   const installBtn = document.getElementById("installAppBtn");
+  const headerBtn = document.getElementById("installAppHeaderBtn");
 
   function showInstallPopup(){
     if(localStorage.getItem("mutashabihat-install-dismissed") === "true") return;
@@ -181,7 +184,10 @@
   window.addEventListener("beforeinstallprompt", (e)=>{
     e.preventDefault();
     deferredInstallPrompt = e;
-    showInstallPopup();
+    if(!isIOS){
+      headerBtn.style.display = "flex";
+      showInstallPopup();
+    }
   });
 
   installBtn.addEventListener("click", async ()=>{
@@ -196,6 +202,19 @@
     installPopupOverlay.classList.add("hidden");
   });
 
+  headerBtn.addEventListener("click", async ()=>{
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      if(outcome === "accepted"){
+        localStorage.setItem("mutashabihat-install-dismissed", "true");
+        headerBtn.style.display = "none";
+      }
+      deferredInstallPrompt = null;
+    }
+    installPopupOverlay.classList.add("hidden");
+  });
+
   closeBtn.addEventListener("click", ()=>{
     localStorage.setItem("mutashabihat-install-dismissed", "true");
     installPopupOverlay.classList.add("hidden");
@@ -203,6 +222,7 @@
 
   if(window.matchMedia("(display-mode: standalone)").matches){
     localStorage.setItem("mutashabihat-install-dismissed", "true");
+    headerBtn.style.display = "none";
   }
 </script>
 </body>
